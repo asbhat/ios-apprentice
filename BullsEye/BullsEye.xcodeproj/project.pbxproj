@@ -15,6 +15,8 @@
 		4876DE82216067D500990343 /* BullsEyeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4876DE81216067D500990343 /* BullsEyeTests.swift */; };
 		4876DE8D216067D500990343 /* BullsEyeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4876DE8C216067D500990343 /* BullsEyeUITests.swift */; };
 		4876DE9B2161DACB00990343 /* BullsEyeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4876DE9A2161DACB00990343 /* BullsEyeModel.swift */; };
+		4876DE9D216328B400990343 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4876DE9C216328B400990343 /* InfoViewController.swift */; };
+		4876DE9F2163307000990343 /* BullsEye.html in Resources */ = {isa = PBXBuildFile; fileRef = 4876DE9E2163306F00990343 /* BullsEye.html */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		4876DE8C216067D500990343 /* BullsEyeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BullsEyeUITests.swift; sourceTree = "<group>"; };
 		4876DE8E216067D500990343 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4876DE9A2161DACB00990343 /* BullsEyeModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BullsEyeModel.swift; sourceTree = "<group>"; };
+		4876DE9C216328B400990343 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
+		4876DE9E2163306F00990343 /* BullsEye.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = BullsEye.html; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,8 +103,10 @@
 		4876DE6B216067D400990343 /* BullsEye */ = {
 			isa = PBXGroup;
 			children = (
+				4876DE9E2163306F00990343 /* BullsEye.html */,
 				4876DE6C216067D400990343 /* AppDelegate.swift */,
 				4876DE6E216067D400990343 /* ViewController.swift */,
+				4876DE9C216328B400990343 /* InfoViewController.swift */,
 				4876DE9A2161DACB00990343 /* BullsEyeModel.swift */,
 				4876DE70216067D400990343 /* Main.storyboard */,
 				4876DE73216067D500990343 /* Assets.xcassets */,
@@ -233,6 +239,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4876DE77216067D500990343 /* LaunchScreen.storyboard in Resources */,
+				4876DE9F2163307000990343 /* BullsEye.html in Resources */,
 				4876DE74216067D500990343 /* Assets.xcassets in Resources */,
 				4876DE72216067D400990343 /* Main.storyboard in Resources */,
 			);
@@ -261,6 +268,7 @@
 			files = (
 				4876DE9B2161DACB00990343 /* BullsEyeModel.swift in Sources */,
 				4876DE6F216067D400990343 /* ViewController.swift in Sources */,
+				4876DE9D216328B400990343 /* InfoViewController.swift in Sources */,
 				4876DE6D216067D400990343 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -437,7 +445,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 9JN3X82564;
 				INFOPLIST_FILE = BullsEye/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -457,7 +465,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = 9JN3X82564;
 				INFOPLIST_FILE = BullsEye/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
