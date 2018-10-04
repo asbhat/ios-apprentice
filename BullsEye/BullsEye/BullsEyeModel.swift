@@ -25,22 +25,21 @@ class BullsEyeModel {
 
     let slider = (min:0, max:100)
 
-    private var roundCounter = 0
-    private var targetValue = 0
-    private var scoreValue = 0
+    private(set) var round = 0
+    private(set) var target = 0
+    private(set) var score = 0
 
-    var round: Int {
-        return roundCounter
-    }
-    var target: Int {
-        return targetValue
-    }
-    var score: Int {
-        return scoreValue
-    }
+    /**
+     Calculates points and updates the game's total score for a guess.
 
-    func calcPoints(currentValue: Int) -> (value: Int, message: String) {
-        let difference = abs(targetValue - currentValue)
+     - Parameter guess: The user's attempt to get close to the `target`.
+
+     - Returns:
+        - `points`: number of points awarded for the `guess`.
+        - `message`: qualitative message for the `guess`.
+     */
+    func calcPoints(from guess: Int) -> (points: Int, message: String) {
+        let difference = abs(target - guess)
         let pointsMessage: String
         var bonusPoints = 0
 
@@ -59,23 +58,23 @@ class BullsEyeModel {
             pointsMessage = "Not Even Close..."
         }
 
-        let pointsValue = slider.max - abs(targetValue - currentValue) + bonusPoints
-        scoreValue += pointsValue
-        return (pointsValue, pointsMessage)
+        let points = slider.max - abs(target - guess) + bonusPoints
+        score += points
+        return (points, pointsMessage)
     }
 
     func startNewRound() {
         setNewTarget()
-        roundCounter += 1
+        round += 1
     }
 
     func resetGame() {
-        roundCounter = 0
-        scoreValue = 0
+        round = 0
+        score = 0
         startNewRound()
     }
 
     private func setNewTarget() {
-        targetValue = 1 + Int(arc4random_uniform(UInt32(slider.max)))
+        target = 1 + Int(arc4random_uniform(UInt32(slider.max)))
     }
 }

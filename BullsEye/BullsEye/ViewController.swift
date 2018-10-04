@@ -19,6 +19,7 @@
 //  along with this program.  If not, see <https://www.gnu.org/licenses/>.
 //
 
+import QuartzCore
 import UIKit
 
 class ViewController: UIViewController {
@@ -35,7 +36,10 @@ class ViewController: UIViewController {
         formatter.numberStyle = .decimal
         return formatter
     }()
-    private let startingSliderValue = 50
+
+    private var startingSliderValue: Int {
+        return (self.bullsEyeGame.slider.max + self.bullsEyeGame.slider.min) / 2
+    }
     private var score = 0 {
         didSet {
             scoreLabel.text = scoreFormatter.string(from: score as NSNumber)
@@ -62,7 +66,10 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        slider.minimumValue = Float(bullsEyeGame.slider.min)
+        slider.maximumValue = Float(bullsEyeGame.slider.max)
+
         let thumbImageNormal = #imageLiteral(resourceName: "SliderThumb-Normal")
         slider.setThumbImage(thumbImageNormal, for: .normal)
 
@@ -83,17 +90,14 @@ class ViewController: UIViewController {
     }
 
     @IBAction func showAlert() {
-        let (points, alertTitle) = bullsEyeGame.calcPoints(currentValue: currentValue)
-        score = bullsEyeGame.score
+        let (points, alertTitle) = bullsEyeGame.calcPoints(from: currentValue)
 
         let alertMessage = "You scored \(points) points!"
         let actionTitle = "OK"
 
         let alert = UIAlertController(title: alertTitle, message: alertMessage, preferredStyle: .alert)
         let action = UIAlertAction(title: actionTitle, style: .default, handler: {_ in self.startNewRound()})
-
         alert.addAction(action)
-
         present(alert, animated: true, completion: nil)
     }
 
@@ -113,6 +117,15 @@ class ViewController: UIViewController {
         bullsEyeGame.resetGame()
         currentValue = startingSliderValue
         syncToBullsEyeGame()
+        newGameTransition()
+    }
+
+    private func newGameTransition() {
+        let transition = CATransition()
+        transition.type = .fade  // this is the default
+        transition.duration = 1  // in seconds
+        transition.timingFunction = CAMediaTimingFunction(name: .easeOut)
+        view.layer.add(transition, forKey: nil)
     }
 }
 
