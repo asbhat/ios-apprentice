@@ -14,6 +14,7 @@
 		4876DEB72174530F00990343 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4876DEB52174530F00990343 /* LaunchScreen.storyboard */; };
 		4876DEC22174530F00990343 /* ChecklistsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4876DEC12174530F00990343 /* ChecklistsTests.swift */; };
 		4876DECD2174530F00990343 /* ChecklistsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4876DECC2174530F00990343 /* ChecklistsUITests.swift */; };
+		4876DEDB21799BDD00990343 /* ChecklistItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4876DEDA21799BDD00990343 /* ChecklistItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -47,6 +48,7 @@
 		4876DEC82174530F00990343 /* ChecklistsUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChecklistsUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4876DECC2174530F00990343 /* ChecklistsUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistsUITests.swift; sourceTree = "<group>"; };
 		4876DECE2174530F00990343 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4876DEDA21799BDD00990343 /* ChecklistItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 			children = (
 				4876DEAC2174530C00990343 /* AppDelegate.swift */,
 				4876DEAE2174530C00990343 /* ChecklistViewController.swift */,
+				4876DEDA21799BDD00990343 /* ChecklistItem.swift */,
 				4876DEB02174530C00990343 /* Main.storyboard */,
 				4876DEB32174530F00990343 /* Assets.xcassets */,
 				4876DEB52174530F00990343 /* LaunchScreen.storyboard */,
@@ -257,6 +260,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4876DEAF2174530C00990343 /* ChecklistViewController.swift in Sources */,
+				4876DEDB21799BDD00990343 /* ChecklistItem.swift in Sources */,
 				4876DEAD2174530C00990343 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -433,6 +437,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9JN3X82564;
 				INFOPLIST_FILE = Checklists/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -443,6 +448,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -451,6 +457,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9JN3X82564;
 				INFOPLIST_FILE = Checklists/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -461,6 +468,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
