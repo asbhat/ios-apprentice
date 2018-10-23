@@ -8,16 +8,11 @@
 
 import Foundation
 
-class ChecklistItem {
+struct ChecklistItem {
     var text = ""
     private(set) var isChecked = false
 
-    init(text: String, isChecked: Bool) {
-        self.text = text
-        self.isChecked = isChecked
-    }
-
-    func toggleChecked() {
+    mutating func toggleChecked() {
         isChecked.toggle()
     }
 }
