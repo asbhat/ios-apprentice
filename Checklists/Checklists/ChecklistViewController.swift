@@ -8,10 +8,11 @@
 
 import UIKit
 
-class ChecklistViewController: UITableViewController, AddItemViewControllerDelegate {
+class ChecklistViewController: UITableViewController, ItemDetailViewControllerDelegate {
 
     var items = [ChecklistItem]()
     let addItemSegueId = "AddItem"
+    let editItemSegueId = "EditItem"
 
     required init?(coder aDecoder: NSCoder) {
         let row0item = ChecklistItem(text: "Walk the dog", isChecked: false)
@@ -64,18 +65,24 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segue.identifier {
         case addItemSegueId:
-            let controller = segue.destination as! AddItemViewController
+            let controller = segue.destination as! ItemDetailViewController
             controller.delegate = self
+        case editItemSegueId:
+            let controller = segue.destination as! ItemDetailViewController
+            controller.delegate = self
+            if let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
+                controller.itemToEdit = items[indexPath.row]
+            }
         default:
             break
         }
     }
 
-    func addItemViewControllerDidCancel(_ controller: AddItemViewController) {
+    func itemDetailViewControllerDidCancel(_ controller: ItemDetailViewController) {
         navigationController?.popViewController(animated: true)
     }
 
-    func addItemViewController(_ controller: AddItemViewController, didFinishAdding item: ChecklistItem) {
+    func itemDetailViewController(_ controller: ItemDetailViewController, didFinishAdding item: ChecklistItem) {
         items.append(item)
         let indexPath = IndexPath(row: items.count - 1, section: 0)
         tableView.insertRows(at: [indexPath], with: .automatic)
@@ -83,8 +90,34 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
         navigationController?.popViewController(animated: true)
     }
 
+    func itemDetailViewController(_ controller: ItemDetailViewController, didFinishEditing item: ChecklistItem) {
+        if let index = items.firstIndex(where: {$0 == item}) {
+            let indexPath = IndexPath(row: index, section: 0)
+            if let cell = tableView.cellForRow(at: indexPath) {
+                configureText(for: cell, with: item)
+            }
+        }
+        navigationController?.popViewController(animated: true)
+    }
+
     func configureCheckmark(for cell: UITableViewCell, with item: ChecklistItem) {
-        cell.accessoryType = item.isChecked ? .checkmark : .none
+        var text: NSAttributedString
+        let checkedAttributes: [NSAttributedString.Key : Any] = [
+            NSAttributedString.Key.strikethroughStyle : NSUnderlineStyle.single.rawValue,
+            NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+        ]
+        let checkLabel = cell.viewWithTag(1001) as! UILabel
+
+        if item.isChecked {
+            checkLabel.text = "✅"
+            text = NSAttributedString(string: item.text, attributes: checkedAttributes)
+        } else {
+            checkLabel.text = " "
+            text = NSAttributedString(string: item.text)
+        }
+
+        let cellLabel = cell.viewWithTag(1000) as! UILabel
+        cellLabel.attributedText = text
     }
 
     func configureText(for cell: UITableViewCell, with item: ChecklistItem) {
@@ -93,4 +126,3 @@ class ChecklistViewController: UITableViewController, AddItemViewControllerDeleg
     }
 
 }
-

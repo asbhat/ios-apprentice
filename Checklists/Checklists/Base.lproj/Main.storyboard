@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="s40-oa-3kr">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="s40-oa-3kr">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -17,27 +17,38 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="checkmark" indentationWidth="10" reuseIdentifier="ChecklistItem" id="EuD-aB-kHx">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="detailDisclosureButton" indentationWidth="10" reuseIdentifier="ChecklistItem" id="EuD-aB-kHx">
                                 <rect key="frame" x="0.0" y="28" width="320" height="55"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EuD-aB-kHx" id="mrf-Vz-jTw">
-                                    <rect key="frame" x="0.0" y="0.0" width="280" height="54.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="252" height="54.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" tag="1000" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YLl-pt-tya">
-                                            <rect key="frame" x="20" y="0.0" width="240" height="54.5"/>
+                                            <rect key="frame" x="51" y="0.0" width="193" height="54.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" tag="1001" contentMode="left" horizontalHuggingPriority="750" verticalHuggingPriority="750" text="✅" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MIL-hm-b4A">
+                                            <rect key="frame" x="20" y="17" width="23" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="YLl-pt-tya" secondAttribute="trailing" constant="20" symbolic="YES" id="PFY-JD-bBm"/>
+                                        <constraint firstItem="MIL-hm-b4A" firstAttribute="leading" secondItem="mrf-Vz-jTw" secondAttribute="leading" constant="20" symbolic="YES" id="Kvp-z0-xBH"/>
+                                        <constraint firstAttribute="trailing" secondItem="YLl-pt-tya" secondAttribute="trailing" constant="8" id="PFY-JD-bBm"/>
+                                        <constraint firstItem="MIL-hm-b4A" firstAttribute="centerY" secondItem="mrf-Vz-jTw" secondAttribute="centerY" id="VjW-8t-upV"/>
+                                        <constraint firstItem="YLl-pt-tya" firstAttribute="leading" secondItem="MIL-hm-b4A" secondAttribute="trailing" constant="8" id="cQI-k4-EI5"/>
                                         <constraint firstAttribute="bottom" secondItem="YLl-pt-tya" secondAttribute="bottom" id="eBp-RY-0BH"/>
-                                        <constraint firstItem="YLl-pt-tya" firstAttribute="leading" secondItem="mrf-Vz-jTw" secondAttribute="leading" constant="20" symbolic="YES" id="fmS-qk-Uav"/>
                                         <constraint firstItem="YLl-pt-tya" firstAttribute="top" secondItem="mrf-Vz-jTw" secondAttribute="top" id="xus-my-fmq"/>
                                     </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="RYM-IX-22f" kind="show" identifier="EditItem" trigger="accessoryAction" id="fdI-Wx-WmI"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -60,7 +71,7 @@
         <!--Add Item-->
         <scene sceneID="6zI-h4-Xnl">
             <objects>
-                <tableViewController id="RYM-IX-22f" customClass="AddItemViewController" customModule="Checklists" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="RYM-IX-22f" customClass="ItemDetailViewController" customModule="Checklists" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" allowsSelection="NO" rowHeight="55" sectionHeaderHeight="18" sectionFooterHeight="18" id="X9X-tO-qK4">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -142,4 +153,7 @@
             <point key="canvasLocation" x="105" y="61.267605633802816"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="fdI-Wx-WmI"/>
+    </inferredMetricsTieBreakers>
 </document>
