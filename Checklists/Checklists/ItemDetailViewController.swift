@@ -41,6 +41,7 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
     }
 
     // MARK: - Actions
+
     @IBAction func cancel() {
         delegate?.itemDetailViewControllerDidCancel(self)
     }
@@ -61,7 +62,6 @@ class ItemDetailViewController: UITableViewController, UITextFieldDelegate {
         let newText = oldText.replacingCharacters(in: stringRange, with: string)
 
         doneBarButton.isEnabled = !newText.isEmpty
-
         return true
     }
 

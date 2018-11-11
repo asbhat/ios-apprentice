@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		48758C40218FDF1900FE9C00 /* AllListsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48758C3F218FDF1900FE9C00 /* AllListsViewController.swift */; };
+		48758C422191612200FE9C00 /* Checklist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48758C412191612200FE9C00 /* Checklist.swift */; };
+		48758C44219531F100FE9C00 /* ListDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48758C43219531F100FE9C00 /* ListDetailViewController.swift */; };
+		48758C822197C9D800FE9C00 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48758C812197C9D800FE9C00 /* DataModel.swift */; };
 		4876DEAD2174530C00990343 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4876DEAC2174530C00990343 /* AppDelegate.swift */; };
 		4876DEAF2174530C00990343 /* ChecklistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4876DEAE2174530C00990343 /* ChecklistViewController.swift */; };
 		4876DEB22174530C00990343 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4876DEB02174530C00990343 /* Main.storyboard */; };
@@ -36,6 +40,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		48758C3F218FDF1900FE9C00 /* AllListsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllListsViewController.swift; sourceTree = "<group>"; };
+		48758C412191612200FE9C00 /* Checklist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checklist.swift; sourceTree = "<group>"; };
+		48758C43219531F100FE9C00 /* ListDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListDetailViewController.swift; sourceTree = "<group>"; };
+		48758C812197C9D800FE9C00 /* DataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		4876DEA92174530C00990343 /* Checklists.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Checklists.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4876DEAC2174530C00990343 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4876DEAE2174530C00990343 /* ChecklistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChecklistViewController.swift; sourceTree = "<group>"; };
@@ -102,10 +110,14 @@
 			isa = PBXGroup;
 			children = (
 				4876DEAC2174530C00990343 /* AppDelegate.swift */,
-				4876DEAE2174530C00990343 /* ChecklistViewController.swift */,
-				4876DEDA21799BDD00990343 /* ChecklistItem.swift */,
 				4876DEB02174530C00990343 /* Main.storyboard */,
+				48758C3F218FDF1900FE9C00 /* AllListsViewController.swift */,
+				4876DEAE2174530C00990343 /* ChecklistViewController.swift */,
 				4876DEDC217D4CB900990343 /* ItemDetailViewController.swift */,
+				48758C43219531F100FE9C00 /* ListDetailViewController.swift */,
+				48758C812197C9D800FE9C00 /* DataModel.swift */,
+				48758C412191612200FE9C00 /* Checklist.swift */,
+				4876DEDA21799BDD00990343 /* ChecklistItem.swift */,
 				4876DEB32174530F00990343 /* Assets.xcassets */,
 				4876DEB52174530F00990343 /* LaunchScreen.storyboard */,
 				4876DEB82174530F00990343 /* Info.plist */,
@@ -263,8 +275,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				4876DEAF2174530C00990343 /* ChecklistViewController.swift in Sources */,
+				48758C44219531F100FE9C00 /* ListDetailViewController.swift in Sources */,
 				4876DEDD217D4CB900990343 /* ItemDetailViewController.swift in Sources */,
+				48758C422191612200FE9C00 /* Checklist.swift in Sources */,
 				4876DEDB21799BDD00990343 /* ChecklistItem.swift in Sources */,
+				48758C822197C9D800FE9C00 /* DataModel.swift in Sources */,
+				48758C40218FDF1900FE9C00 /* AllListsViewController.swift in Sources */,
 				4876DEAD2174530C00990343 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -441,7 +457,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 9JN3X82564;
 				INFOPLIST_FILE = Checklists/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -461,7 +477,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEVELOPMENT_TEAM = 9JN3X82564;
 				INFOPLIST_FILE = Checklists/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
