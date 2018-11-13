@@ -9,6 +9,20 @@
 import Foundation
 
 class DataModel {
+
+    let userDefaultsChecklistIndexKey = "ChecklistIndex"
+    let userDefaultsFirstTimeKey = "FirstTime"
+
+    /// The index of the last checklist the user selected. Is `-1` if no checklist was selected.
+    var indexOfSelectedChecklist: Int {
+        get {
+            return UserDefaults.standard.integer(forKey: userDefaultsChecklistIndexKey)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: userDefaultsChecklistIndexKey)
+        }
+    }
+
     var lists = [Checklist]() {
         didSet {
             saveData()
@@ -24,6 +38,20 @@ class DataModel {
 
     init() {
         loadChecklists(from: dataFilePath)
+        registerDefaults()
+        handleFirstTime()
+    }
+
+    private func handleFirstTime() {
+        let userDefaults = UserDefaults.standard
+
+        if userDefaults.bool(forKey: userDefaultsFirstTimeKey) {
+            let checklist = Checklist(name: "List")
+            lists.append(checklist)
+            indexOfSelectedChecklist = 0
+            userDefaults.set(false, forKey: userDefaultsFirstTimeKey)
+            userDefaults.synchronize()
+        }
     }
 
     // MARK: - Save to and load from disk
@@ -53,4 +81,12 @@ class DataModel {
         }
     }
 
+    private func registerDefaults() {
+        let defaults: [String : Any] = [
+            userDefaultsChecklistIndexKey: -1,
+            userDefaultsFirstTimeKey: true
+        ]
+
+        UserDefaults.standard.register(defaults: defaults)
+    }
 }

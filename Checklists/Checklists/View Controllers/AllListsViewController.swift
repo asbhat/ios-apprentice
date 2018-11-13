@@ -8,17 +8,30 @@
 
 import UIKit
 
-class AllListsViewController: UITableViewController, ListDetailViewControllerDelegate {
+class AllListsViewController: UITableViewController {
 
     let showChecklistSegueId = "ShowChecklist"
     let addChecklistSegueId = "AddChecklist"
     let editChecklistSegueId = "EditChecklist"
+    let listDetailViewControllerId = "ListDetailViewController"
+
     var dataModel = DataModel()
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.navigationItem.leftBarButtonItem = self.editButtonItem
+    }
+
+    // using view*Did*Appear so this always gets called after navigationController(_:willShow:animated:), except on the initial load
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        navigationController?.delegate = self
+
+        let index = dataModel.indexOfSelectedChecklist
+        if index >= 0 && index < dataModel.lists.count {
+            performSegue(withIdentifier: showChecklistSegueId, sender: dataModel.lists[index])
+        }
     }
 
     // MARK: - Table view data source
@@ -28,7 +41,8 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "ShowChecklist", sender: dataModel.lists[indexPath.row])
+        dataModel.indexOfSelectedChecklist = indexPath.row
+        performSegue(withIdentifier: showChecklistSegueId, sender: dataModel.lists[indexPath.row])
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -63,7 +77,7 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
 
     // Loading the List Detail controller by hand (not using a segue)
     override func tableView(_ tableView: UITableView, accessoryButtonTappedForRowWith indexPath: IndexPath) {
-        let controller = storyboard?.instantiateViewController(withIdentifier: "ListDetailViewController") as! ListDetailViewController
+        let controller = storyboard?.instantiateViewController(withIdentifier: listDetailViewControllerId) as! ListDetailViewController
         controller.delegate = self
 
         let checklist = dataModel.lists[indexPath.row]
@@ -78,6 +92,33 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
 
     }
     */
+
+    // MARK: - Navigation
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case showChecklistSegueId:
+            let controller = segue.destination as! ChecklistViewController
+            controller.checklist = (sender as! Checklist)
+        case addChecklistSegueId:
+            let controller = segue.destination as! ListDetailViewController
+            controller.delegate = self
+        case editChecklistSegueId:
+            let controller = segue.destination as! ListDetailViewController
+            controller.delegate = self
+            if let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
+                controller.checklistToEdit = dataModel.lists[indexPath.row]
+            }
+        default:
+            break
+        }
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
+
+}
+
+extension AllListsViewController: ListDetailViewControllerDelegate {
 
     // MARK: - List detail delegates
 
@@ -103,28 +144,13 @@ class AllListsViewController: UITableViewController, ListDetailViewControllerDel
 
         navigationController?.popViewController(animated: true)
     }
+}
 
-    // MARK: - Navigation
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segue.identifier {
-        case showChecklistSegueId:
-            let controller = segue.destination as! ChecklistViewController
-            controller.checklist = (sender as! Checklist)
-        case addChecklistSegueId:
-            let controller = segue.destination as! ListDetailViewController
-            controller.delegate = self
-        case editChecklistSegueId:
-            let controller = segue.destination as! ListDetailViewController
-            controller.delegate = self
-            if let indexPath = tableView.indexPath(for: sender as! UITableViewCell) {
-                controller.checklistToEdit = dataModel.lists[indexPath.row]
-            }
-        default:
-            break
+extension AllListsViewController: UINavigationControllerDelegate {
+    func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        // if the user navigates back to the parent view controller (this one), remove the saved checklist index
+        if viewController === self {
+            dataModel.indexOfSelectedChecklist = -1
         }
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
     }
-
 }

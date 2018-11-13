@@ -86,6 +86,37 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		48758CC2219AAE3000FE9C00 /* Data Models */ = {
+			isa = PBXGroup;
+			children = (
+				48758C812197C9D800FE9C00 /* DataModel.swift */,
+				48758C412191612200FE9C00 /* Checklist.swift */,
+				4876DEDA21799BDD00990343 /* ChecklistItem.swift */,
+			);
+			path = "Data Models";
+			sourceTree = "<group>";
+		};
+		48758CC3219AAE4C00FE9C00 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				48758C3F218FDF1900FE9C00 /* AllListsViewController.swift */,
+				4876DEAE2174530C00990343 /* ChecklistViewController.swift */,
+				4876DEDC217D4CB900990343 /* ItemDetailViewController.swift */,
+				48758C43219531F100FE9C00 /* ListDetailViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		48758CC4219AAE8700FE9C00 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4876DEB02174530C00990343 /* Main.storyboard */,
+				4876DEB32174530F00990343 /* Assets.xcassets */,
+				4876DEB52174530F00990343 /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		4876DEA02174530C00990343 = {
 			isa = PBXGroup;
 			children = (
@@ -109,17 +140,10 @@
 		4876DEAB2174530C00990343 /* Checklists */ = {
 			isa = PBXGroup;
 			children = (
+				48758CC2219AAE3000FE9C00 /* Data Models */,
+				48758CC3219AAE4C00FE9C00 /* View Controllers */,
+				48758CC4219AAE8700FE9C00 /* Resources */,
 				4876DEAC2174530C00990343 /* AppDelegate.swift */,
-				4876DEB02174530C00990343 /* Main.storyboard */,
-				48758C3F218FDF1900FE9C00 /* AllListsViewController.swift */,
-				4876DEAE2174530C00990343 /* ChecklistViewController.swift */,
-				4876DEDC217D4CB900990343 /* ItemDetailViewController.swift */,
-				48758C43219531F100FE9C00 /* ListDetailViewController.swift */,
-				48758C812197C9D800FE9C00 /* DataModel.swift */,
-				48758C412191612200FE9C00 /* Checklist.swift */,
-				4876DEDA21799BDD00990343 /* ChecklistItem.swift */,
-				4876DEB32174530F00990343 /* Assets.xcassets */,
-				4876DEB52174530F00990343 /* LaunchScreen.storyboard */,
 				4876DEB82174530F00990343 /* Info.plist */,
 			);
 			path = Checklists;
@@ -457,7 +481,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 9JN3X82564;
 				INFOPLIST_FILE = Checklists/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -477,7 +501,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEVELOPMENT_TEAM = 9JN3X82564;
 				INFOPLIST_FILE = Checklists/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
