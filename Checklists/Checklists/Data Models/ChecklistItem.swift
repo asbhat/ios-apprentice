@@ -9,10 +9,10 @@
 import Foundation
 
 class ChecklistItem: NSObject, Codable {
-    var text = ""
-    private(set) var isChecked = false
+    var text: String
+    private(set) var isChecked: Bool
 
-    init(text: String, isChecked: Bool) {
+    init(text: String, isChecked: Bool = false) {
         self.text = text
         self.isChecked = isChecked
         super.init()

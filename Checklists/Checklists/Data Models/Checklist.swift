@@ -9,11 +9,22 @@
 import Foundation
 
 class Checklist: NSObject, Codable {
-    var name = ""
+    var name: String
+    var iconName: String
     var items = [ChecklistItem]()
 
-    init(name: String) {
+    /**
+     * Remaining number of unchecked items.
+     *
+     * O(n) complexity.
+     */
+    var countUncheckedItems: Int {
+        return items.reduce(0) { cnt, item in cnt + (item.isChecked ? 0 : 1) }
+    }
+
+    init(name: String = "List", iconName: String = String(describing: ChecklistIcon.folder)) {
         self.name = name
+        self.iconName = iconName
         super.init()
     }
 

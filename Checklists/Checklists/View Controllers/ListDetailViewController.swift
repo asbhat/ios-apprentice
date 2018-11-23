@@ -14,22 +14,34 @@ protocol ListDetailViewControllerDelegate: class {
     func listDetailViewController(_ controller: ListDetailViewController, didFinishEditing checklist: Checklist)
 }
 
-class ListDetailViewController: UITableViewController, UITextFieldDelegate {
+class ListDetailViewController: UITableViewController {
 
-    // MARK: - Outlets
+    // MARK: Outlets
 
     @IBOutlet weak var doneBarButton: UIBarButtonItem!
     @IBOutlet weak var textField: UITextField!
-
-    // MARK: - Delegate
+    @IBOutlet weak var iconImageView: UIImageView!
+    
+    // MARK: Delegate
 
     weak var delegate: ListDetailViewControllerDelegate?
 
+    // MARK: Instance variables
+
+    let pickIconSegueId = "PickIcon"
     var checklistToEdit: Checklist?
-    
+    var iconName = String(describing: ChecklistIcon.folder) {
+        didSet {
+            iconImageView.image = UIImage(named: iconName)
+        }
+    }
+
+    // MARK: Controller lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        iconName = checklistToEdit?.iconName ?? iconName
         if let checklist = checklistToEdit {
             title = "Edit Checklist"
             textField.text = checklist.name
@@ -42,8 +54,51 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate {
         textField.becomeFirstResponder()
     }
 
-    // MARK: - Text field delegates
+    // MARK: Table view data source
 
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        switch indexPath.section {
+        case 1:
+            return indexPath
+        default:
+            return nil
+        }
+    }
+
+    // MARK: Actions
+
+    @IBAction func cancel() {
+        delegate?.listDetailViewControllerDidCancel(self)
+    }
+
+    @IBAction func done() {
+        if let checklist = checklistToEdit {
+            checklist.name = textField.text!
+            checklist.iconName = iconName
+            delegate?.listDetailViewController(self, didFinishEditing: checklist)
+        } else {
+            let checklist = Checklist(name: textField.text!, iconName: iconName)
+            delegate?.listDetailViewController(self, didFinishAdding: checklist)
+        }
+    }
+
+    // MARK: Navigation
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case pickIconSegueId:
+            let controller = segue.destination as! IconPickerViewController
+            controller.delegate = self
+        default:
+            break
+        }
+    }
+
+}
+
+// MARK: - Extensions
+
+extension ListDetailViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 
         let oldText = textField.text!
@@ -53,31 +108,11 @@ class ListDetailViewController: UITableViewController, UITextFieldDelegate {
         doneBarButton.isEnabled = !newText.isEmpty
         return true
     }
+}
 
-    // MARK: - Actions
-
-    @IBAction func cancel() {
-        delegate?.listDetailViewControllerDidCancel(self)
+extension ListDetailViewController: IconPickerViewControllerDelegate {
+    func iconPicker(_ picker: IconPickerViewController, didPick iconName: String) {
+        self.iconName = iconName
+        navigationController?.popViewController(animated: true)
     }
-
-    @IBAction func done() {
-        if let checklist = checklistToEdit {
-            checklist.name = textField.text!
-            delegate?.listDetailViewController(self, didFinishEditing: checklist)
-        } else {
-            let checklist = Checklist(name: textField.text!)
-            delegate?.listDetailViewController(self, didFinishAdding: checklist)
-        }
-    }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

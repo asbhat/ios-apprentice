@@ -23,6 +23,11 @@ class AllListsViewController: UITableViewController {
         self.navigationItem.leftBarButtonItem = self.editButtonItem
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tableView.reloadData()
+    }
+
     // using view*Did*Appear so this always gets called after navigationController(_:willShow:animated:), except on the initial load
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -47,7 +52,19 @@ class AllListsViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = makeCell(for: tableView)
-        cell.textLabel!.text = dataModel.lists[indexPath.row].name
+        let checklist = dataModel.lists[indexPath.row]
+        cell.textLabel!.text = checklist.name
+
+        let remainingItems = checklist.countUncheckedItems
+        if checklist.items.count == 0 {
+            cell.detailTextLabel!.text = "(No items)"
+        } else if remainingItems == 0 {
+            cell.detailTextLabel!.text = "All Done!"
+        } else {
+            cell.detailTextLabel!.text = "\(remainingItems) Remaining"
+        }
+
+        cell.imageView!.image = UIImage(named: checklist.iconName)
         cell.accessoryType = .detailDisclosureButton
         return cell
     }
@@ -57,7 +74,7 @@ class AllListsViewController: UITableViewController {
         if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) {
             return cell
         } else {
-            return UITableViewCell(style: .default, reuseIdentifier: cellIdentifier)
+            return UITableViewCell(style: .subtitle, reuseIdentifier: cellIdentifier)
         }
     }
 
@@ -128,19 +145,15 @@ extension AllListsViewController: ListDetailViewControllerDelegate {
 
     func listDetailViewController(_ controller: ListDetailViewController, didFinishAdding checklist: Checklist) {
         dataModel.lists.append(checklist)
-        let indexPath = IndexPath(row: dataModel.lists.count - 1, section: 0)
-        tableView.insertRows(at: [indexPath], with: .automatic)
+        dataModel.sortChecklists()
+        tableView.reloadData()
 
         navigationController?.popViewController(animated: true)
     }
 
     func listDetailViewController(_ controller: ListDetailViewController, didFinishEditing checklist: Checklist) {
-        if let index = dataModel.lists.firstIndex(of: checklist) {
-            let indexPath = IndexPath(row: index, section: 0)
-            if let cell = tableView.cellForRow(at: indexPath) {
-                cell.textLabel?.text = checklist.name
-            }
-        }
+        dataModel.sortChecklists()
+        tableView.reloadData()
 
         navigationController?.popViewController(animated: true)
     }

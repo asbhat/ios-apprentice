@@ -46,12 +46,16 @@ class DataModel {
         let userDefaults = UserDefaults.standard
 
         if userDefaults.bool(forKey: userDefaultsFirstTimeKey) {
-            let checklist = Checklist(name: "List")
+            let checklist = Checklist()
             lists.append(checklist)
             indexOfSelectedChecklist = 0
             userDefaults.set(false, forKey: userDefaultsFirstTimeKey)
             userDefaults.synchronize()
         }
+    }
+
+    func sortChecklists() {
+        lists.sort(by: {checklist1, checklist2 in return checklist1.name.localizedStandardCompare(checklist2.name) == .orderedAscending})
     }
 
     // MARK: - Save to and load from disk
@@ -75,6 +79,7 @@ class DataModel {
             let decoder = PropertyListDecoder()
             do {
                 lists = try decoder.decode([Checklist].self, from: data)
+                sortChecklists()
             } catch {
                 print("Error decoding the items array!")
             }

@@ -116,7 +116,7 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
             checkLabel.text = "✅"
             text = NSAttributedString(string: item.text, attributes: checkedAttributes)
         } else {
-            checkLabel.text = " "
+            checkLabel.text = ""
             text = NSAttributedString(string: item.text)
         }
 
