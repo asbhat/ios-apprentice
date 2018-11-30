@@ -28,4 +28,7 @@ class Checklist: NSObject, Codable {
         super.init()
     }
 
+    func sortItemsByDueDate() {
+        items.sort(by: {item1, item2 in return item1.dueDate.compare(item2.dueDate) == .orderedAscending} )
+    }
 }

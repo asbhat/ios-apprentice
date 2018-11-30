@@ -10,6 +10,7 @@ import Foundation
 
 class DataModel {
 
+    static let userDefaultsChecklistItemIDKey = "ChecklistItemID"
     let userDefaultsChecklistIndexKey = "ChecklistIndex"
     let userDefaultsFirstTimeKey = "FirstTime"
 
@@ -56,6 +57,16 @@ class DataModel {
 
     func sortChecklists() {
         lists.sort(by: {checklist1, checklist2 in return checklist1.name.localizedStandardCompare(checklist2.name) == .orderedAscending})
+    }
+
+    // MARK: - Class functions
+
+    class func nextChecklistItemID() -> Int {
+        let userDefaults = UserDefaults.standard
+        let itemID = userDefaults.integer(forKey: userDefaultsChecklistItemIDKey)
+        userDefaults.set(itemID + 1, forKey: userDefaultsChecklistItemIDKey)
+        userDefaults.synchronize()
+        return itemID
     }
 
     // MARK: - Save to and load from disk

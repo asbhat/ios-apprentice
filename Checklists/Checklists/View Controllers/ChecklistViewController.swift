@@ -14,6 +14,13 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
     let editItemSegueId = "EditItem"
     var checklist: Checklist!
 
+    var subtitleDateFormatter: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateStyle = .medium
+        formatter.timeStyle = .short
+        return formatter
+    }()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // self.navigationItem.leftBarButtonItem = self.editButtonItem
@@ -36,8 +43,10 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) {
-            checklist.items[indexPath.row].toggleChecked()
-            configureCheckmark(for: cell, with: checklist.items[indexPath.row])
+            let item = checklist.items[indexPath.row]
+            item.toggleChecked()
+            configureText(for: cell, with: item)
+            configureCheckmark(for: cell, with: item)
         }
 
         tableView.deselectRow(at: indexPath, animated: true)
@@ -88,13 +97,17 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
 
     func itemDetailViewController(_ controller: ItemDetailViewController, didFinishAdding item: ChecklistItem) {
         checklist.items.append(item)
-        let indexPath = IndexPath(row: checklist.items.count - 1, section: 0)
-        tableView.insertRows(at: [indexPath], with: .automatic)
+        checklist.sortItemsByDueDate()
+        if let index = checklist.items.firstIndex(of: item) {
+            let indexPath = IndexPath(row: index, section: 0)
+            tableView.insertRows(at: [indexPath], with: .automatic)
+        }
 
         navigationController?.popViewController(animated: true)
     }
 
     func itemDetailViewController(_ controller: ItemDetailViewController, didFinishEditing item: ChecklistItem) {
+        checklist.sortItemsByDueDate()
         if let index = checklist.items.firstIndex(of: item) {
             let indexPath = IndexPath(row: index, section: 0)
             if let cell = tableView.cellForRow(at: indexPath) {
@@ -104,29 +117,31 @@ class ChecklistViewController: UITableViewController, ItemDetailViewControllerDe
         navigationController?.popViewController(animated: true)
     }
 
-    func configureCheckmark(for cell: UITableViewCell, with item: ChecklistItem) {
-        var text: NSAttributedString
+    private func configureCheckmark(for cell: UITableViewCell, with item: ChecklistItem) {
+        let checkLabel = cell.viewWithTag(1001) as! UILabel
+        checkLabel.text = item.isChecked ? "✅" : ""
+    }
+
+    private func configureText(for cell: UITableViewCell, with item: ChecklistItem) {
+        let label = cell.viewWithTag(1000) as! UILabel
+        let text = item.text
+        let subtitleLabel = cell.viewWithTag(1002) as! UILabel
+        let subtitleText = subtitleDateFormatter.string(from: item.dueDate)
+        var attributedText: NSAttributedString
+        var attributedSubtitleText: NSAttributedString
         let checkedAttributes: [NSAttributedString.Key : Any] = [
             NSAttributedString.Key.strikethroughStyle : NSUnderlineStyle.single.rawValue,
             NSAttributedString.Key.foregroundColor : #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
         ]
-        let checkLabel = cell.viewWithTag(1001) as! UILabel
-
         if item.isChecked {
-            checkLabel.text = "✅"
-            text = NSAttributedString(string: item.text, attributes: checkedAttributes)
+            attributedText = NSAttributedString(string: text, attributes: checkedAttributes)
+            attributedSubtitleText = NSAttributedString(string: subtitleText, attributes: checkedAttributes)
         } else {
-            checkLabel.text = ""
-            text = NSAttributedString(string: item.text)
+            attributedText = NSAttributedString(string: text)
+            attributedSubtitleText = NSAttributedString(string: subtitleText)
         }
-
-        let cellLabel = cell.viewWithTag(1000) as! UILabel
-        cellLabel.attributedText = text
-    }
-
-    func configureText(for cell: UITableViewCell, with item: ChecklistItem) {
-        let label = cell.viewWithTag(1000) as! UILabel
-        label.text = item.text
+        label.attributedText = attributedText
+        subtitleLabel.attributedText = attributedSubtitleText
     }
 
 }
