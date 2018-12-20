@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4858933121C727C100FCA902 /* CategoryPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4858933021C727C100FCA902 /* CategoryPickerViewController.swift */; };
+		4858933321C7280F00FCA902 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4858933221C7280F00FCA902 /* Category.swift */; };
+		486D2F0421BDDF3E00D67135 /* LocationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486D2F0321BDDF3E00D67135 /* LocationDetailsViewController.swift */; };
+		486D2F0721BDE4E100D67135 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486D2F0621BDE4E100D67135 /* Location.swift */; };
 		48E4CD8321B387D400E92295 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E4CD8221B387D400E92295 /* AppDelegate.swift */; };
 		48E4CD8521B387D400E92295 /* CurrentLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E4CD8421B387D400E92295 /* CurrentLocationViewController.swift */; };
 		48E4CD8721B387D400E92295 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48E4CD8621B387D400E92295 /* SecondViewController.swift */; };
@@ -16,6 +20,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4858933021C727C100FCA902 /* CategoryPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPickerViewController.swift; sourceTree = "<group>"; };
+		4858933221C7280F00FCA902 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		486D2F0321BDDF3E00D67135 /* LocationDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailsViewController.swift; sourceTree = "<group>"; };
+		486D2F0621BDE4E100D67135 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Location.swift; path = "MyLocations/Data Models/Location.swift"; sourceTree = SOURCE_ROOT; };
 		48E4CD7F21B387D400E92295 /* MyLocations.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyLocations.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		48E4CD8221B387D400E92295 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		48E4CD8421B387D400E92295 /* CurrentLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentLocationViewController.swift; sourceTree = "<group>"; };
@@ -37,6 +45,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		486D2F0221BDDEE000D67135 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				48E4CD8421B387D400E92295 /* CurrentLocationViewController.swift */,
+				486D2F0321BDDF3E00D67135 /* LocationDetailsViewController.swift */,
+				4858933021C727C100FCA902 /* CategoryPickerViewController.swift */,
+				48E4CD8621B387D400E92295 /* SecondViewController.swift */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		486D2F0521BDE0BD00D67135 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				48E4CD8821B387D400E92295 /* Main.storyboard */,
+				48E4CD8B21B387D700E92295 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		486D2F0821BDE53C00D67135 /* Data Models */ = {
+			isa = PBXGroup;
+			children = (
+				486D2F0621BDE4E100D67135 /* Location.swift */,
+				4858933221C7280F00FCA902 /* Category.swift */,
+			);
+			path = "Data Models";
+			sourceTree = "<group>";
+		};
 		48E4CD7621B387D400E92295 = {
 			isa = PBXGroup;
 			children = (
@@ -57,10 +94,9 @@
 			isa = PBXGroup;
 			children = (
 				48E4CD8221B387D400E92295 /* AppDelegate.swift */,
-				48E4CD8421B387D400E92295 /* CurrentLocationViewController.swift */,
-				48E4CD8621B387D400E92295 /* SecondViewController.swift */,
-				48E4CD8821B387D400E92295 /* Main.storyboard */,
-				48E4CD8B21B387D700E92295 /* Assets.xcassets */,
+				486D2F0821BDE53C00D67135 /* Data Models */,
+				486D2F0221BDDEE000D67135 /* View Controllers */,
+				486D2F0521BDE0BD00D67135 /* Resources */,
 				48E4CD8D21B387D700E92295 /* LaunchScreen.storyboard */,
 				48E4CD9021B387D700E92295 /* Info.plist */,
 			);
@@ -138,9 +174,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4858933121C727C100FCA902 /* CategoryPickerViewController.swift in Sources */,
 				48E4CD8721B387D400E92295 /* SecondViewController.swift in Sources */,
 				48E4CD8321B387D400E92295 /* AppDelegate.swift in Sources */,
+				486D2F0721BDE4E100D67135 /* Location.swift in Sources */,
+				486D2F0421BDDF3E00D67135 /* LocationDetailsViewController.swift in Sources */,
 				48E4CD8521B387D400E92295 /* CurrentLocationViewController.swift in Sources */,
+				4858933321C7280F00FCA902 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,7 +240,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -263,7 +303,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 3;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;

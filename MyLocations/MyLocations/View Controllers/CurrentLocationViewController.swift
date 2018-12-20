@@ -17,6 +17,7 @@ class CurrentLocationViewController: UIViewController {
 
     // MARK: - Instance variables
 
+    let tagLocationSegueId = "TagLocation"
     let getButtonTitles = (stop: "Stop", start: "Get My Location")
     let getLocationTimeout: Double = 10
 
@@ -111,6 +112,11 @@ class CurrentLocationViewController: UIViewController {
         updateLabels()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.isNavigationBarHidden = true
+    }
+
     /// Whether the application is authorized for location services or not. Will request authorization if the user has not decided yet.
     private func isAuthorized() -> Bool {
         switch CLLocationManager.authorizationStatus() {
@@ -118,6 +124,7 @@ class CurrentLocationViewController: UIViewController {
             showLocationServicesDeniedAlert()
             return false
         case .notDetermined:
+            locationManager.delegate = self
             locationManager.requestWhenInUseAuthorization()
             return false
         case .authorizedAlways, .authorizedWhenInUse:
@@ -207,6 +214,23 @@ class CurrentLocationViewController: UIViewController {
         }
     }
 
+    // MARK: - Navigation
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+        case tagLocationSegueId:
+            let controller = segue.destination as! LocationDetailsViewController
+            controller.delegate = self
+
+            if let loc = location {
+                // FIXME: set this from the data model
+                controller.location = Location(address: placemark, category: Category.noCategory, date: Date(), description: nil, coordinate: CLLocationCoordinate2D(latitude: loc.coordinate.latitude, longitude: loc.coordinate.longitude))
+            }
+        default:
+            break
+        }
+    }
+
 }
 
 extension CurrentLocationViewController: CLLocationManagerDelegate {
@@ -261,17 +285,37 @@ extension CurrentLocationViewController: CLLocationManagerDelegate {
     }
 
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        getLocation()
+        print("Authorization changed! \(status)")
+        switch status {
+        case .authorizedWhenInUse, .authorizedAlways:
+            getLocation()
+        default:
+            locationManager.delegate = nil
+            break
+        }
+
     }
 
 }
 
-fileprivate extension String {
-    init(from placemark: CLPlacemark) {
+extension CurrentLocationViewController: TagLocationViewControllerDelegate {
+    func tagLocationViewControllerDidCancel(_ controller: LocationDetailsViewController) {
+        navigationController?.popViewController(animated: true)
+    }
+
+    func tagLocationViewController(_ controller: LocationDetailsViewController, didFinishAdding location: Location) {
+        // TODO: add location to data model
+        navigationController?.popViewController(animated: true)
+    }
+}
+
+extension String {
+    init(from placemark: CLPlacemark?) {
         self =
         """
-        \(placemark.subThoroughfare?.appending(" ") ?? "")\(placemark.thoroughfare ?? "")
-        \(placemark.locality?.appending(" ") ?? "")\(placemark.administrativeArea?.appending(" ") ?? "")\(placemark.postalCode ?? "")
+        \(placemark?.subThoroughfare?.appending(" ") ?? "")\(placemark?.thoroughfare ?? "")
+        \(placemark?.locality?.appending(", ") ?? "")\(placemark?.administrativeArea?.appending(" ") ?? "")\(placemark?.postalCode ?? "")
+        \(placemark?.country ?? "")
         """
     }
 }
