@@ -44,3 +44,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 }
 
+
+extension UIApplication {
+    class func topViewController(controller: UIViewController? = UIApplication.shared.keyWindow?.rootViewController) -> UIViewController? {
+        return UIViewController.topViewController(controller: controller)
+    }
+}
+
+extension UIViewController {
+    static func topViewController(controller: UIViewController?) -> UIViewController? {
+        if let navigationController = controller as? UINavigationController, let visible = navigationController.visibleViewController {
+            return topViewController(controller: visible)
+        }
+        if let tabController = controller as? UITabBarController, let selected = tabController.selectedViewController {
+            return topViewController(controller: selected)
+        }
+        if let presented = controller?.presentedViewController {
+            return topViewController(controller: presented)
+        }
+        return controller
+    }
+}

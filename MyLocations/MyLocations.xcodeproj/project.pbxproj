@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		480A9AE021CDE1E80066E49A /* HUDView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 480A9ADF21CDE1E80066E49A /* HUDView.swift */; };
 		4858933121C727C100FCA902 /* CategoryPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4858933021C727C100FCA902 /* CategoryPickerViewController.swift */; };
 		4858933321C7280F00FCA902 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4858933221C7280F00FCA902 /* Category.swift */; };
 		486D2F0421BDDF3E00D67135 /* LocationDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 486D2F0321BDDF3E00D67135 /* LocationDetailsViewController.swift */; };
@@ -17,9 +18,11 @@
 		48E4CD8A21B387D400E92295 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48E4CD8821B387D400E92295 /* Main.storyboard */; };
 		48E4CD8C21B387D700E92295 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 48E4CD8B21B387D700E92295 /* Assets.xcassets */; };
 		48E4CD8F21B387D700E92295 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 48E4CD8D21B387D700E92295 /* LaunchScreen.storyboard */; };
+		48F03D1821CDD41900A248FA /* DescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48F03D1721CDD41900A248FA /* DescriptionTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		480A9ADF21CDE1E80066E49A /* HUDView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HUDView.swift; sourceTree = "<group>"; };
 		4858933021C727C100FCA902 /* CategoryPickerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPickerViewController.swift; sourceTree = "<group>"; };
 		4858933221C7280F00FCA902 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		486D2F0321BDDF3E00D67135 /* LocationDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailsViewController.swift; sourceTree = "<group>"; };
@@ -32,6 +35,7 @@
 		48E4CD8B21B387D700E92295 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		48E4CD8E21B387D700E92295 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		48E4CD9021B387D700E92295 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		48F03D1721CDD41900A248FA /* DescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,11 +100,21 @@
 				48E4CD8221B387D400E92295 /* AppDelegate.swift */,
 				486D2F0821BDE53C00D67135 /* Data Models */,
 				486D2F0221BDDEE000D67135 /* View Controllers */,
+				48F03D1921CDD42B00A248FA /* Views */,
 				486D2F0521BDE0BD00D67135 /* Resources */,
 				48E4CD8D21B387D700E92295 /* LaunchScreen.storyboard */,
 				48E4CD9021B387D700E92295 /* Info.plist */,
 			);
 			path = MyLocations;
+			sourceTree = "<group>";
+		};
+		48F03D1921CDD42B00A248FA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				48F03D1721CDD41900A248FA /* DescriptionTableViewCell.swift */,
+				480A9ADF21CDE1E80066E49A /* HUDView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -174,6 +188,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				480A9AE021CDE1E80066E49A /* HUDView.swift in Sources */,
+				48F03D1821CDD41900A248FA /* DescriptionTableViewCell.swift in Sources */,
 				4858933121C727C100FCA902 /* CategoryPickerViewController.swift in Sources */,
 				48E4CD8721B387D400E92295 /* SecondViewController.swift in Sources */,
 				48E4CD8321B387D400E92295 /* AppDelegate.swift in Sources */,
@@ -240,7 +256,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -303,7 +319,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 3;
+				CURRENT_PROJECT_VERSION = 4;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;

@@ -52,11 +52,24 @@ class LocationDetailsViewController: UITableViewController {
         if location != nil {
             updateLabels()
         }
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        tapGestureRecognizer.cancelsTouchesInView = false
+        tableView.addGestureRecognizer(tapGestureRecognizer)
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = false
+    }
+
+    // MARK: - Table view data source
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView.cellForRow(at: indexPath) is DescriptionTableViewCell {
+            descriptionTextView.becomeFirstResponder()
+        } else {
+            descriptionTextView.resignFirstResponder()
+        }
     }
 
     // MARK: - Actions
@@ -66,7 +79,16 @@ class LocationDetailsViewController: UITableViewController {
     }
 
     @IBAction func done() {
-        delegate?.tagLocationViewController(self, didFinishAdding: location)
+        // TODO: find the top controller more dynamically (currently assumes the tab bar is on top)
+        //      want the highest-level view so a user can't touch the navigation controls or tab bar until the animation is done
+        let hudView = HUDView(in: tabBarController!.view, animated: true)
+        hudView.text = "Tagged"
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+            self.delegate?.tagLocationViewController(self, didFinishAdding: self.location)
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
+            hudView.hide()
+        }
     }
 
     @IBAction func categoryPickerDidPickCategory(_ segue: UIStoryboardSegue) {
@@ -84,6 +106,14 @@ class LocationDetailsViewController: UITableViewController {
         longitudeLabel.text = latLongFormatter.string(from: NSNumber(value: location.coordinate.longitude))
         addressLabel.text = String(from: location.address)
         dateLabel.text = dateFormatter.string(from: location.date)
+    }
+
+    @objc private func hideKeyboard(_ gestureRecognizer: UIGestureRecognizer) {
+        let point = gestureRecognizer.location(in: tableView)
+        let indexPath = tableView.indexPathForRow(at: point)
+        if indexPath == nil || !(tableView.cellForRow(at: indexPath!) is DescriptionTableViewCell) {
+            descriptionTextView.resignFirstResponder()
+        }
     }
 
     // MARK: - Navigation
